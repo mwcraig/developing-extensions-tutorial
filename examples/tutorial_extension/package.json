@@ -85,7 +85,8 @@
     "stylelint-config-standard": "~24.0.0",
     "stylelint-prettier": "^2.0.0",
     "typescript": "~4.1.3",
-    "ts-jest": "^26.0.0"
+    "ts-jest": "^26.0.0",
+    "source-map-loader": "^3.0.1"
   },
   "sideEffects": [
     "style/*.css",
@@ -97,18 +98,19 @@
   },
   "jupyterlab": {
     "discovery": {
-        "server": {
-          "managers": [
-            "pip"
-          ],
-          "base": {
-            "name": "tutorial_extension"
-          }
+      "server": {
+        "managers": [
+          "pip"
+        ],
+        "base": {
+          "name": "tutorial_extension"
         }
+      }
     },
     "extension": true,
     "outputDir": "tutorial_extension/labextension",
-    "schemaDir": "schema"
+    "schemaDir": "schema",
+    "webpackConfig": "webpack.config.js"
   },
   "jupyter-releaser": {
     "hooks": {

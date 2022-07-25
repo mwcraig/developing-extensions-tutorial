@@ -2,10 +2,10 @@ import {
   JupyterFrontEnd,
   JupyterFrontEndPlugin
 } from '@jupyterlab/application';
-import { MainAreaWidget } from '@jupyterlab/apputils';
+import { MainAreaWidget, ToolbarButton } from '@jupyterlab/apputils';
 import { ILauncher } from '@jupyterlab/launcher';
 import { ISettingRegistry } from '@jupyterlab/settingregistry';
-import { imageIcon } from '@jupyterlab/ui-components';
+import { imageIcon, refreshIcon } from '@jupyterlab/ui-components';
 
 import { TutorialWidget } from './widget';
 
@@ -47,12 +47,13 @@ const plugin: JupyterFrontEndPlugin<void> = {
       execute: () => {
         const widget = new TutorialWidget();
         const main = new MainAreaWidget({ content: widget });
+        const button = new ToolbarButton({icon: refreshIcon, onClick: () => widget.load_image()});
         main.title.label = 'Tutorial Widget';
         main.title.icon = imageIcon;
         main.title.caption = widget.title.label;
 
         // TODO: add a button to refresh image
-
+        main.toolbar.addItem('Refresh', button);
         app.shell.add(main, 'main');
       },
       icon: imageIcon,
