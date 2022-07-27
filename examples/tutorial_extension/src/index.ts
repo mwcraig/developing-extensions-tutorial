@@ -4,6 +4,7 @@ import {
 } from '@jupyterlab/application';
 import { MainAreaWidget, ToolbarButton } from '@jupyterlab/apputils';
 import { ILauncher } from '@jupyterlab/launcher';
+import { IMainMenu } from '@jupyterlab/mainmenu';
 import { ISettingRegistry } from '@jupyterlab/settingregistry';
 import { imageIcon, refreshIcon } from '@jupyterlab/ui-components';
 
@@ -15,11 +16,12 @@ import { TutorialWidget } from './widget';
 const plugin: JupyterFrontEndPlugin<void> = {
   id: 'tutorial-extension:plugin',
   autoStart: true,
-  optional: [ISettingRegistry, ILauncher],
+  optional: [ISettingRegistry, ILauncher, IMainMenu],
   activate: (
     app: JupyterFrontEnd,
     settingRegistry: ISettingRegistry | null,
-    launcher: ILauncher | null
+    launcher: ILauncher | null,
+    mainMenu: IMainMenu | null,
   ) => {
     console.log('JupyterLab extension tutorial-extension is activated!');
 
