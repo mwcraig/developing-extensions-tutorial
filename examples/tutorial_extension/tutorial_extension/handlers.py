@@ -40,7 +40,6 @@ class RouteHandler(APIHandler):
     def post(self):
         input_data = self.get_json_body()
         p = Path('.')
-        print(p.absolute())
         (p / input_data['path'] / 'wooty-woot.ipynb').touch()
         self.finish(json.dumps({'hello': 'world'}))
 

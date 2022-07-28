@@ -28,7 +28,6 @@ const plugin: JupyterFrontEndPlugin<void> = {
     fileBrowser: IFileBrowserFactory,
   ) => {
     console.log('JupyterLab extension tutorial-extension is activated!');
-    console.log('Path is ', fileBrowser.defaultBrowser.model.path);
 
     // Load the settings from schema/plugin.json
     // This can include adding commands to a context menu
@@ -52,14 +51,10 @@ const plugin: JupyterFrontEndPlugin<void> = {
     app.commands.addCommand('tutorial:open', {
       // code to run when this command is executed
       execute: () => {
-        console.log("MOOOOO1");
         const widget = new TutorialWidget();
         const main = new MainAreaWidget({ content: widget });
         const button = new ToolbarButton({icon: refreshIcon, onClick: () => widget.load_image()});
 
-        console.log("MOOOOO2");
-
-        console.log('Other Path is ', fileBrowser.defaultBrowser.model.path);
         main.title.label = 'Tutorial Widget';
         main.title.icon = imageIcon;
         main.title.caption = widget.title.label;
