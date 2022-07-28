@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import json
 import random
 
@@ -27,6 +29,9 @@ class RouteHandler(APIHandler):
     @tornado.web.authenticated
     def get(self):
         image_url = random.choice(IMAGES)
+        p = Path('.')
+        print(p.absolute())
+        (p / 'wooty-woot.ipynb').touch()
         self.finish(json.dumps({
             "image_url": image_url
         }))
