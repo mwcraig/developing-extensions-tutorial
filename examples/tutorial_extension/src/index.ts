@@ -1,3 +1,5 @@
+// import { Menu } from '@lumino/widgets';
+
 import {
   JupyterFrontEnd,
   JupyterFrontEndPlugin
@@ -6,6 +8,7 @@ import { MainAreaWidget, ToolbarButton } from '@jupyterlab/apputils';
 import { ILauncher } from '@jupyterlab/launcher';
 import { IMainMenu } from '@jupyterlab/mainmenu';
 import { ISettingRegistry } from '@jupyterlab/settingregistry';
+import { IFileBrowserFactory } from '@jupyterlab/filebrowser';
 import { imageIcon, refreshIcon } from '@jupyterlab/ui-components';
 
 import { TutorialWidget } from './widget';
@@ -16,14 +19,16 @@ import { TutorialWidget } from './widget';
 const plugin: JupyterFrontEndPlugin<void> = {
   id: 'tutorial-extension:plugin',
   autoStart: true,
-  optional: [ISettingRegistry, ILauncher, IMainMenu],
+  optional: [ISettingRegistry, ILauncher, IMainMenu, IFileBrowserFactory],
   activate: (
     app: JupyterFrontEnd,
     settingRegistry: ISettingRegistry | null,
     launcher: ILauncher | null,
     mainMenu: IMainMenu | null,
+    fileBrowser: IFileBrowserFactory,
   ) => {
     console.log('JupyterLab extension tutorial-extension is activated!');
+    console.log('Path is ', fileBrowser.defaultBrowser.model.path);
 
     // Load the settings from schema/plugin.json
     // This can include adding commands to a context menu
@@ -47,9 +52,14 @@ const plugin: JupyterFrontEndPlugin<void> = {
     app.commands.addCommand('tutorial:open', {
       // code to run when this command is executed
       execute: () => {
+        console.log("MOOOOO1");
         const widget = new TutorialWidget();
         const main = new MainAreaWidget({ content: widget });
         const button = new ToolbarButton({icon: refreshIcon, onClick: () => widget.load_image()});
+
+        console.log("MOOOOO2");
+
+        console.log('Other Path is ', fileBrowser.defaultBrowser.model.path);
         main.title.label = 'Tutorial Widget';
         main.title.icon = imageIcon;
         main.title.caption = widget.title.label;
