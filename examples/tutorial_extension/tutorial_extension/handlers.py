@@ -36,6 +36,14 @@ class RouteHandler(APIHandler):
             "image_url": image_url
         }))
 
+    @tornado.web.authenticated
+    def post(self):
+        input_data = self.get_json_body()
+        p = Path('.')
+        print(p.absolute())
+        (p / input_data['path'] / 'wooty-woot.ipynb').touch()
+        self.finish(json.dumps({'hello': 'world'}))
+
 
 def setup_handlers(web_app):
     host_pattern = ".*$"

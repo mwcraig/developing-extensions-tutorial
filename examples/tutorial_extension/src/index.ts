@@ -67,6 +67,7 @@ const plugin: JupyterFrontEndPlugin<void> = {
         // TODO: add a button to refresh image
         main.toolbar.addItem('Refresh', button);
         app.shell.add(main, 'main');
+        widget.make_a_file(fileBrowser.defaultBrowser.model.path);
       },
       icon: imageIcon,
       label: 'Open Tutorial Widget'

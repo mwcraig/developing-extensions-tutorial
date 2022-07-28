@@ -27,5 +27,15 @@ export class TutorialWidget extends Widget {
       });
   }
 
+  make_a_file(path: string): void {
+    const reply = requestAPI<any>('image', {body: JSON.stringify({'path': path}), method: 'POST'});
+    console.log("Aaaand I'm back", reply);
+  }
+
+  // async make_a_file(path: string): Promise<void> {
+  //   const reply = await requestAPI<any>('image', {body: JSON.stringify({'path': path}), method: 'POST'});
+  //   console.log("Aaaand I'm back", reply);
+  // }
+
   img: HTMLImageElement;
 }
