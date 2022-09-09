@@ -71,7 +71,8 @@ const plugin: JupyterFrontEndPlugin<void> = {
     //
     if (launcher) {
       launcher.add({
-        command: 'tutorial:open'
+        command: 'tutorial:open',
+        category: 'Moo'
       });
     }
   }
